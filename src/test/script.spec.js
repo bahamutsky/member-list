@@ -1,10 +1,10 @@
-xdescribe('script.js Tests', function() {
+describe('script.js Tests', function() {
     it('should be able to run with \'karma run\'', function() {
         expect(true).toBeTruthy();
     });
 });
 
-xdescribe('KlDevMembersController Test', function() {
+describe('KlDevMembersController Test', function() {
 	beforeEach(module('app.memberList'));
 	
 	var $controller;
@@ -28,18 +28,19 @@ describe('MemberController Test', function(){
 		$controller = _$controller_;
 	}));
 	
-	describe('Adding data into the array Test', function(){
-		it('Append the array', function(){
-			var controllerRead = $controller('KlDevMembers', {});
-			var controllerAdd = $controller('MemberController', {});
-			var data = {
+	var testData = {
 				Name: 'Test',
 				Email: 'test@mail.com',
 				Phone: '012-3456789',
 				};
-			controllerAdd.profile = data;
+	
+	describe('Adding data into the array Test', function(){
+		it('Append the array', function(){
+			var controllerRead = $controller('KlDevMembers', {});
+			var controllerAdd = $controller('MemberController', {});
+			controllerAdd.profile = testData;
 			controllerAdd.addMember();
-			expect(controllerRead.profiles[1].Name).toEqual('Test');
+			expect(controllerRead.profiles[controllerRead.profiles.length - 1].Name).toEqual('Test');
 		});
 	});
 	
@@ -47,14 +48,9 @@ describe('MemberController Test', function(){
 		it('Delete the array', function(){
 			var controllerRead = $controller('KlDevMembers', {});
 			var controllerDel = $controller('MemberController', {});
-			var data = 
-			{
-				Name: 'Test',
-				Email: 'test@mail.com',
-				Phone: '012-3456789',
-			 }
-			 controllerDel.deleteMember();
-			 expect(controllerRead.profiles.length).toEqual(1);
+			controllerDel.deleteMember(controllerRead.profiles.indexOf(testData));
+			expect(controllerRead.profiles.length).toEqual(1);
+			expect(controllerRead.profiles[0].Name).toEqual('Gin');
 		});
 	});
 });

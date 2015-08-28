@@ -30,7 +30,7 @@ app.controller("MemberController", function(){
 		var created = new Date();
 		IdNumber++;
 		var data = {
-		Id : IdNumber,
+		Id : IdNumber.toString(),
 		Name : this.profile.Name,
 		Email : this.profile.Email,
 		Phone: this.profile.Phone,
@@ -41,13 +41,13 @@ app.controller("MemberController", function(){
 			+ addZero(created.getMinutes()) + ":"
 			+ addZero(created.getSeconds())
 		};
-		//bio.push(data);
 		bio.splice(0,0,data);
 		this.profile = {};
 	};
 	
 	this.deleteMember = function(delMember){
-		 bio.splice(delMember,1);	
+		var indexArr = bio.indexOf(delMember);
+		 bio.splice(indexArr,1);	
 	}
 	
 });

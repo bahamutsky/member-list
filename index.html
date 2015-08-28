@@ -12,7 +12,7 @@
 				<tr>
 					<td><label for="name">Name:</label></td>
 					<td><label for="email">Email:</label></td>
-					<td><label for="email">Email:</label></td>
+					<td><label for="email">Telephone:</label></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -30,8 +30,7 @@
 					</td>
 					<td>
 						<button ng-click="memberForm.$valid && memberCtrl.addMember()" 
-							name="submit">Submit
-						</button>
+							name="submit">Submit</button>
 					</td>
 				</tr>
 			</table>
@@ -53,7 +52,8 @@
 						<td>{{profile.Phone}}</td>
 						<td>{{profile.Date}}</td>
 						<td>
-							<button ng-click="memberCtrl.deleteMember('{{profile}}')">Del</button>
+							<button ng-click="memberCtrl.deleteMember(profile)" 
+								data="{{profile}}">Del</button>
 						</td>
 					</tr>
 				</table>

@@ -28,9 +28,9 @@ bower install
 As a user
 I want to add member information
 So that the table will have the list of all members.
-I will specify their name, email, and telephone number
+I will specify required information of their name, email, and telephone number
 And those infomation will appear on the first row
-along with current date and time.
+along with unique ID number, current date, and time.
 ```
 
 ### Remove member information
@@ -59,6 +59,11 @@ Run `grunt test`.
 
 ### Libraries
 - You are allowed to add more libraries to have a working application and a more presentable layout.
+- Install respective library with bower:
+
+```
+bower install <library-name> --save
+```
 
 ## Submit Your Work
 Please submit through Github Pull Request.

@@ -2,16 +2,45 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        karma: {
-            unit: {
-                    configFile: 'karma.conf.js',
-                    singleRun: true,
-                    autoWatch: false
-                  }
+        jasmine: {
+            coverage: {
+                src: ['src/*.js'],
+                options: {
+                    specs: ['src/test/*.spec.js'],
+                    template: require('grunt-template-jasmine-istanbul'),
+                    vendor: 'bower_components/angular/angular.min.js',
+                    templateOptions: {
+                        coverage: 'bin/coverage/coverage.json',
+                        report: [
+                            {
+                                type: 'html',
+                                options: {
+                                    dir: 'bin/coverage/html'
+                                }
+                            },
+                            {
+                                type: 'cobertura',
+                                options: {
+                                    dir: 'bin/coverage/cobertura'
+                                }
+                            },
+                            {
+                                type: 'text-summary'
+                            }
+                        ],
+                        threshold: {
+                            lines: 75,
+                            statements: 75,
+                            branches: 75,
+                            functions: 90
+                        }
+                    }
+                }
+            }
         }
     });
 
-    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-    grunt.registerTask('test', ['karma']);
+    grunt.registerTask('test', ['jasmine:coverage']);
 };

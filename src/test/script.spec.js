@@ -40,7 +40,7 @@ describe('MemberController Test', function(){
 			var controllerAdd = $controller('MemberController', {});
 			controllerAdd.profile = testData;
 			controllerAdd.addMember();
-			expect(controllerRead.profiles[controllerRead.profiles.length - 1].Name).toEqual('Test');
+			expect(controllerRead.profiles[0].Name).toEqual('Test');
 		});
 	});
 	
@@ -48,7 +48,7 @@ describe('MemberController Test', function(){
 		it('Delete the array', function(){
 			var controllerRead = $controller('KlDevMembers', {});
 			var controllerDel = $controller('MemberController', {});
-			controllerDel.deleteMember(controllerRead.profiles.indexOf(testData));
+			controllerDel.deleteMember(controllerRead.profiles[0]);
 			expect(controllerRead.profiles.length).toEqual(1);
 			expect(controllerRead.profiles[0].Name).toEqual('Gin');
 		});

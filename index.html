@@ -7,35 +7,56 @@
 </head>
 <body ng-app="app.memberList">
 	<div id="members" ng-controller="KlDevMembers as member">
-		<form id="form" name="memberForm" ng-controller="MemberController as memberCtrl" >
-			<div id="fillform">
-				<div>
-					<label for="name">Name:</label>
-					<input type="text" placeholder="ST Dev KL" name="name" ng-model="memberCtrl.profile.Name"/>
-				</div>
-				<div>
-					<label for="email">Email:</label>
-					<input type="email" placeholder="user@domain.com" name="email" ng-model="memberCtrl.profile.Email"/>
-				</div>
-				<div>
-					<label for="tel">Telephone:</label>
-					<input type="tel" placeholder="" name="tel" ng-model="memberCtrl.profile.Phone"/>
-				</div>
-				<div>
-					<button ng-click="memberCtrl.addMember()" name="submit">Submit</button>
-				</div>
-			</div>
+		<form id="form" name="memberForm" ng-controller="MemberController as memberCtrl" novalidate>
+			<table>
+				<tr>
+					<td><label for="name">Name:</label></td>
+					<td><label for="email">Email:</label></td>
+					<td><label for="email">Email:</label></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" placeholder="ST Dev KL" name="name" 
+							ng-model="memberCtrl.profile.Name" required></input>
+					</td>
+					<td>
+						<input type="email" placeholder="user@domain.com" name="email" 
+							ng-model="memberCtrl.profile.Email" required></input>
+					</td>
+					<td>
+						<input type="tel" placeholder="" name="tel" 
+							ng-model="memberCtrl.profile.Phone" required></input>
+					</td>
+					<td>
+						<button ng-click="memberForm.$valid && memberCtrl.addMember()" 
+							name="submit">Submit
+						</button>
+					</td>
+				</tr>
+			</table>
 			<p></p>
 			<div id="member-list" >
-				<div id="member-list-header" ng-repeat="profile in member.profiles">
-					<div>ID : {{profile.Id}}</div>
-					<div>Name : {{profile.Name}} </div>
-					<div>Email : {{profile.Email}} </div>
-					<div>Telephone : {{profile.Phone}}</div>
-					<div>Date Added : {{profile.Date}} </div>
-					<button ng-click="memberCtrl.deleteMember('{{profile}}')">Del</button>
-					<p></p>
-				</div>
+				<table border="1" margin="2">
+					<tr>
+						<td>ID</td>
+						<td>Name</td>
+						<td>Email</td>
+						<td>Telephone</td>
+						<td>Date Added</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr ng-repeat="profile in member.profiles">
+						<td>{{profile.Id}}</td>
+						<td>{{profile.Name}}</td>
+						<td>{{profile.Email}}</td>
+						<td>{{profile.Phone}}</td>
+						<td>{{profile.Date}}</td>
+						<td>
+							<button ng-click="memberCtrl.deleteMember('{{profile}}')">Del</button>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</form>
 	</div>

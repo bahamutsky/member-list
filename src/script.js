@@ -11,11 +11,17 @@ var bio = [
 		 Name: 'Gin',
 		 Email: 'gin@mail.com',
 		 Phone: '012-2911560',
-		 Date : '25-8-2015'
+		 Date : '25-08-2015 09:00:00'
 	 }
 ];
 var IdNumber = 1;	 
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
 app.controller("MemberController", function(){
 	this.profile = {};
@@ -28,9 +34,15 @@ app.controller("MemberController", function(){
 		Name : this.profile.Name,
 		Email : this.profile.Email,
 		Phone: this.profile.Phone,
-		Date: created.getDate() + "-" + (created.getMonth() + 1) + "-" + created.getFullYear()
+		Date: created.getDate() + "-" 
+			+ addZero((created.getMonth() + 1)) + "-" 
+			+ created.getFullYear() + " "
+			+ addZero(created.getHours()) + ":"
+			+ addZero(created.getMinutes()) + ":"
+			+ addZero(created.getSeconds())
 		};
-		bio.push(data);
+		//bio.push(data);
+		bio.splice(0,0,data);
 		this.profile = {};
 	};
 	
